@@ -13,7 +13,7 @@ export default function Registro() {
       <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ padding: 16 }}>
           <View>
-            <Text>Bem-vindo ao Bank Fiap!</Text>
+            <Text>Bem-vindo ao JuBank</Text>
             <Text>Crie uma conta gratuita para explorar diversas possibilidades com nosso banco!</Text>
           </View>
 
@@ -30,11 +30,11 @@ export default function Registro() {
             <Text>Senha</Text>
             <TextInput placeholder="mínimo de 6 caracteres" value={senha} onChangeText={setSenha} secureTextEntry />
 
-            <TouchableOpacity style={{ marginTop: 20 }}>
+            <TouchableOpacity>
               <Text>Cadastrar</Text>
             </TouchableOpacity>
 
-            <View style={{ marginTop: 10 }}>
+            <View>
               <Text>Já possui uma conta?</Text>
               <TouchableOpacity onPress={() => router.back()}>
                 <Text>Faça Login</Text>

@@ -9,7 +9,7 @@ export default function Login() {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined}>
       <View>
-        <Text>Bem-vindo de volta!</Text>
+        <Text>Bem-vindo de volta</Text>
         <Text>Entre na sua conta</Text>
       </View>
 
