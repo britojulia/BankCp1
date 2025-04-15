@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from "react";
+
 import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { router } from "expo-router";
 import { useAuth } from '@/hooks/useAuth';
@@ -7,10 +8,17 @@ import { useAuth } from '@/hooks/useAuth';
 export default function Login() {
   const [apelido, setApelido] = useState('');
   const [senha, setSenha] = useState('');
+  const [isSaved, setIsSaved] = useState(false);
+
   const { handleLogin } = useAuth();
 
-  function submit(){
-    handleLogin(apelido, senha)
+  async function submit() {
+  //  if(!isSaved) {
+    await AsyncStorage.setItem("@mock-bank-password", senha);
+    await AsyncStorage.setItem("@mock-bank-apelido", apelido);
+  //  }
+
+    handleLogin(apelido, senha);
   }
 
   return (

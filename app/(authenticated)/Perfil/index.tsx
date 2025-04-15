@@ -16,7 +16,7 @@ export default function Perfil() {
     async function handleSalvar() {
         setCarregando(true);
         try {
-            const response = await fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/contas", {
+            const response = await fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Contas/ContasController_updatePerfil", {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     },
     voltarText: {
         fontSize: 16,
-        color: '#4a7df3',
+        color: '#ec0c7a',
     },
     header: {
         marginBottom: 32,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f9f9f9',
     },
     button: {
-        backgroundColor: '#4a7df3',
+        backgroundColor: '#ec0c7a',
         paddingVertical: 14,
         borderRadius: 12,
         alignItems: 'center',

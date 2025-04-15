@@ -15,7 +15,6 @@ import {
 } from 'react-native';
 
 interface ITransacoesProps {
-    categoria: string;
     contraparte: {
         apelido: string;
         nome: string;
@@ -57,7 +56,7 @@ export default function Transactions() {
         }
 
         try {
-            const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/transferencias', {
+            const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Transfer%C3%AAncias/TransferenciasController_getTransacoes', {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -120,7 +119,7 @@ export default function Transactions() {
         return (
             <TouchableOpacity
                 style={styles.transacaoItem}
-                onPress={() => router.push('/(authenticated)/TransictionDetail', { transacao: item })}
+                onPress={() => router.push('/(authenticated)/TransictionDetail')}
             >
                 <View style={styles.transacaoIcone}>
                     <View style={[styles.iconeCirculo, { backgroundColor: isEntrada ? 'rgba(75, 181, 67, 0.1)' : 'rgba(242, 78, 30, 0.1)' }]}>
@@ -147,11 +146,6 @@ export default function Transactions() {
                         <Text style={styles.transacaoData}>{formatarData(item.data)}</Text>
                     </View>
 
-                    <View style={styles.transacaoLinha3}>
-                        <View style={styles.categoriaTag}>
-                            <Text style={styles.categoriaTexto}>{item.categoria}</Text>
-                        </View>
-                    </View>
                 </View>
             </TouchableOpacity>
         );
@@ -232,7 +226,7 @@ export default function Transactions() {
                     ListFooterComponent={ListFooter}
                     contentContainerStyle={styles.listaConteudo}
                     refreshControl={
-                        <RefreshControl refreshing={atualizando} onRefresh={onRefresh} colors={['#4a7df3']} />
+                        <RefreshControl refreshing={atualizando} onRefresh={onRefresh} colors={['#ec0c7a']} />
                     }
                     onEndReached={carregarMais}
                     onEndReachedThreshold={0.2}

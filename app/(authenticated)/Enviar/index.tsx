@@ -60,7 +60,7 @@ export default function Enviar() {
     setCarregando(true);
 
     try {
-      const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/transferencias', {
+      const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Transfer%C3%AAncias/TransferenciasController_create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   },
   voltarText: {
     fontSize: 16,
-    color: '#4a7df3',
+    color: '#ec0c7a',
   },
   title: {
     fontSize: 24,
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
   },
   button: {
-    backgroundColor: '#4a7df3',
+    backgroundColor: '#ec0c7a',
     paddingVertical: 14,
     borderRadius: 12,
     alignItems: 'center',

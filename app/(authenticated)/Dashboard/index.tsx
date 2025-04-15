@@ -16,6 +16,9 @@ interface ITransacoesProps {
     valor: number;
 }
 
+export default function Dashboard() {
+
+    
 const [saldo, setSaldo] = useState(0);
 const [transacoes, setTransacoes] = useState<ITransacoesProps[]>([]);
 const [carregandoSaldo, setCarregandoSaldo] = useState(true);
@@ -44,7 +47,7 @@ const buscarSaldo = async () => {
 
     setCarregandoSaldo(true);
     try {
-        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/contas/saldo', {
+        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Contas/ContasController_getSaldo', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -68,7 +71,7 @@ const buscarTransacoes = async () => {
 
     setCarregandoTransacoes(true);
     try {
-        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/transferencias', {
+        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Contas/ContasController_getResumoTransacoes', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -109,7 +112,6 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
     );
 };
 
-export default function Dashboard() {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar />
@@ -217,10 +219,10 @@ const styles = StyleSheet.create({
     valorSaldo: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#4a7df3',
+        color: '#ec0c7a',
     },
     button: {
-        backgroundColor: '#4a7df3',
+        backgroundColor: '#ec0c7a',
         paddingVertical: 14,
         borderRadius: 12,
         alignItems: 'center',
@@ -265,7 +267,7 @@ const styles = StyleSheet.create({
     },
     redirectText: {
         fontSize: 14,
-        color: '#4a7df3',
+        color: '#ec0c7a',
         fontWeight: '500',
     },
     transacaoItem: {
@@ -280,7 +282,7 @@ const styles = StyleSheet.create({
     },
     transacaoValor: {
         fontSize: 14,
-        color: '#4a7df3',
+        color: '#ec0c7a',
     },
     transacaoData: {
         fontSize: 12,

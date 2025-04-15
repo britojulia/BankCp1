@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
   voltarText: {
     fontSize: 16,
-    color: '#4a7df3',
+    color: '#ec0c7a',
   },
   header: {
     marginBottom: 32,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   copiarButton: {
-    backgroundColor: '#4a7df3',
+    backgroundColor: '#ec0c7a',
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 12,
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   compSharingButton: {
-    backgroundColor: '#4a7df3',
+    backgroundColor: '#ec0c7a',
     paddingVertical: 12,
     borderRadius: 12,
     alignItems: 'center',
