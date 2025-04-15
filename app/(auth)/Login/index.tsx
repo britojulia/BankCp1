@@ -1,10 +1,17 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState } from "react";
-import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { router } from "expo-router";
+import { Alert, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { router, useRouter } from "expo-router";
+import { useAuth } from '@/hooks/useAuth';
 
 export default function Login() {
   const [apelido, setApelido] = useState('');
   const [senha, setSenha] = useState('');
+  const { handleLogin } = useAuth();
+
+  function submit(){
+    handleLogin(apelido, senha)
+  }
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined}>
@@ -30,7 +37,7 @@ export default function Login() {
           secureTextEntry
         />
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={submit}>
           <Text>Login</Text>
         </TouchableOpacity>
 
