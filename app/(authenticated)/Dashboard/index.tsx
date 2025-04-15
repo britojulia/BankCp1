@@ -2,7 +2,7 @@ import { useAuth } from "@/hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Alert, FlatList, RefreshControl, SafeAreaView, StatusBar, Text, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Alert, FlatList, RefreshControl, SafeAreaView, StatusBar, Text, TouchableOpacity, View, StyleSheet } from "react-native";
 
 interface ITransacoesProps {
     contraparte: {
@@ -22,9 +22,7 @@ const [carregandoSaldo, setCarregandoSaldo] = useState(true);
 const [carregandoTransacoes, setCarregandoTransacoes] = useState(true);
 const [atualizando, setAtualizando] = useState(false);
 
-
-const {token, usuario  } = useAuth();
-
+const { token, usuario } = useAuth();
 const router = useRouter();
 
 // Função para formatar valores monetários
@@ -53,13 +51,10 @@ const buscarSaldo = async () => {
         });
 
         const dados = await resposta.json();
-
-
         setSaldo(dados.saldo);
     } catch (erro) {
         console.error('Erro ao buscar saldo:', erro);
         Alert.alert('Erro', 'Não foi possível carregar seu saldo');
-        setCarregandoSaldo(false);
     } finally {
         setCarregandoSaldo(false);
     }
@@ -73,16 +68,13 @@ const buscarTransacoes = async () => {
 
     setCarregandoTransacoes(true);
     try {
-        // Em um cenário real, você faria uma requisição para sua API
         const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/transferencias', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         });
         const dados = await resposta.json();
-
         setTransacoes(dados);
-
     } catch (erro) {
         console.error('Erro ao buscar transações:', erro);
         Alert.alert('Erro', 'Não foi possível carregar suas transações');
@@ -98,8 +90,6 @@ const onRefresh = async () => {
     setAtualizando(false);
 };
 
-
-
 // Carregar dados ao montar o componente
 useEffect(() => {
     buscarSaldo();
@@ -107,59 +97,63 @@ useEffect(() => {
 }, [token]);
 
 // Renderiza cada item da lista de transações
-const renderTransacao = ({ item }: {item:ITransacoesProps}) => {
+const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
     const isEntrada = item.tipo === 'recebida';
-}
 
-export default function Dashboard(){
-    return(
+    return (
+        <View style={styles.transacaoItem}>
+            <Text style={styles.transacaoDescricao}>{item.descricao}</Text>
+            <Text style={styles.transacaoValor}>{isEntrada ? `+${formatarMoeda(String(item.valor))}` : `-${formatarMoeda(String(item.valor))}`}</Text>
+            <Text style={styles.transacaoData}>{formatarData(item.data)}</Text>
+        </View>
+    );
+};
 
-        <SafeAreaView>
-            <StatusBar/>
+export default function Dashboard() {
+    return (
+        <SafeAreaView style={styles.container}>
+            <StatusBar />
 
-        {/*cabecalho*/}
-            <View>
-                <View>
-                    <Text>Olá!</Text>
-                    <Text>{usuario?.nome}</Text>
-                </View>
+            {/* Cabeçalho */}
+            <View style={styles.header}>
+                <Text style={styles.title}>Olá!</Text>
+                <Text style={styles.subtitle}>{usuario?.nome}</Text>
             </View>
 
-{/*saldo*/}
-            <View>
-                <View>
-                    <Text>Saldo total</Text>
-                    <View style={styles.cardConteudo}>
-                     {carregandoSaldo ? (
-                         <ActivityIndicator size="large" color="#4a7df3" />
-                     ) : (
-                         <Text style={styles.valorSaldo}>{formatarMoeda(saldo)}</Text>
-                     )}
-                 </View>
-                    <TouchableOpacity onPress={buscarSaldo}>
-                        <Text>Atualizar</Text>
-                    </TouchableOpacity>
+            {/* Saldo */}
+            <View style={styles.cardSaldo}>
+                <Text style={styles.tituloSaldo}>Saldo total</Text>
+                <View style={styles.cardConteudo}>
+                    {carregandoSaldo ? (
+                        <ActivityIndicator size="large" color="#4a7df3" />
+                    ) : (
+                        <Text style={styles.valorSaldo}>{formatarMoeda(String(saldo))}</Text>
+                    )}
                 </View>
-            </View>
-
-            <View>
-                <TouchableOpacity onPress={() => router.push('/Enviar')}>
-                    <Text>Transferir</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => router.push('/Receber')}>
-                    <Text>Receber</Text>
+                <TouchableOpacity onPress={buscarSaldo} style={styles.button}>
+                    <Text style={styles.buttonText}>Atualizar</Text>
                 </TouchableOpacity>
             </View>
 
-{/*transações */}
-            <View>
-                <View>
-                    <Text>Transações</Text>
-                    <TouchableOpacity onPress={() => router.push('/Transacoes')}>
-                        <Text>Ver todas</Text>
+            {/* Transferir / Receber */}
+            <View style={styles.botoesTransacao}>
+                <TouchableOpacity onPress={() => router.push('/Enviar')} style={styles.button}>
+                    <Text style={styles.buttonText}>Transferir</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => router.push('/Receber')} style={styles.button}>
+                    <Text style={styles.buttonText}>Receber</Text>
+                </TouchableOpacity>
+            </View>
+
+            {/* Transações */}
+            <View style={styles.transacoesContainer}>
+                <View style={styles.transacoesHeader}>
+                    <Text style={styles.tituloTransacoes}>Transações</Text>
+                    <TouchableOpacity onPress={() => router.push('/(authenticated)/Transictions/Transictions')}>
+                        <Text style={styles.redirectText}>Ver todas</Text>
                     </TouchableOpacity>
                 </View>
-                
+
                 {carregandoTransacoes ? (
                     <ActivityIndicator style={styles.carregando} size="large" color="#4a7df3" />
                 ) : (
@@ -180,13 +174,116 @@ export default function Dashboard(){
                             </View>
                         }
                     />
-                 )}
-
-                
+                )}
             </View>
         </SafeAreaView>
-
-        
-        
-    )
+    );
 }
+
+// Estilos
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#ffffff',
+    },
+    header: {
+        alignItems: 'center',
+        marginBottom: 32,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#2e3e5c',
+        marginBottom: 8,
+    },
+    subtitle: {
+        fontSize: 16,
+        color: '#7b8bb2',
+    },
+    cardSaldo: {
+        marginHorizontal: 20,
+        marginBottom: 20,
+    },
+    tituloSaldo: {
+        fontSize: 16,
+        color: '#333',
+    },
+    cardConteudo: {
+        padding: 20,
+        backgroundColor: '#f5f5f5',
+        borderRadius: 12,
+        alignItems: 'center',
+    },
+    valorSaldo: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#4a7df3',
+    },
+    button: {
+        backgroundColor: '#4a7df3',
+        paddingVertical: 14,
+        borderRadius: 12,
+        alignItems: 'center',
+        marginTop: 10,
+    },
+    buttonText: {
+        color: '#ffffff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    botoesTransacao: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 20,
+        marginBottom: 20,
+    },
+    transacoesContainer: {
+        flex: 1,
+    },
+    transacoesHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 20,
+        marginBottom: 10,
+    },
+    tituloTransacoes: {
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    carregando: {
+        marginTop: 20,
+    },
+    semTransacoes: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    semTransacoesTexto: {
+        color: '#666',
+        fontSize: 16,
+    },
+    redirectText: {
+        fontSize: 14,
+        color: '#4a7df3',
+        fontWeight: '500',
+    },
+    transacaoItem: {
+        padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: '#e0e0e0',
+    },
+    transacaoDescricao: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#333',
+    },
+    transacaoValor: {
+        fontSize: 14,
+        color: '#4a7df3',
+    },
+    transacaoData: {
+        fontSize: 12,
+        color: '#7b8bb2',
+    },
+});

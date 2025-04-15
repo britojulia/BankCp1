@@ -1,3 +1,4 @@
+import { useAuth } from "@/hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
@@ -10,6 +11,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  StyleSheet,
 } from "react-native";
 
 export default function Enviar() {
@@ -100,22 +102,23 @@ export default function Enviar() {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, padding: 20 }}>
+    <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={{ flex: 1 }}
       >
-        <TouchableOpacity onPress={() => router.back()} style={{ marginBottom: 20 }}>
-          <Text>← Voltar</Text>
+        <TouchableOpacity onPress={() => router.back()} style={styles.voltarButton}>
+          <Text style={styles.voltarText}>← Voltar</Text>
         </TouchableOpacity>
 
-        <Text>Transferir Dinheiro</Text>
-        <Text>Protegido</Text>
+        <Text style={styles.title}>Transferir Dinheiro</Text>
+        <Text style={styles.subtitle}>Protegido</Text>
 
         {/* Valor */}
-        <View>
-          <Text>Digite o valor</Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Digite o valor</Text>
           <TextInput
+            style={styles.input}
             placeholder="0,00"
             keyboardType="numeric"
             value={valor}
@@ -124,9 +127,10 @@ export default function Enviar() {
         </View>
 
         {/* E-mail do destinatário */}
-        <View>
-          <Text>Para quem você deseja enviar?</Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Para quem você deseja enviar?</Text>
           <TextInput
+            style={styles.input}
             placeholder="E-mail do destinatário"
             value={emailDestino}
             onChangeText={setEmailDestino}
@@ -136,9 +140,10 @@ export default function Enviar() {
         </View>
 
         {/* Descrição */}
-        <View>
-          <Text>Descrição (opcional)</Text>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Descrição (opcional)</Text>
           <TextInput
+            style={styles.input}
             placeholder="Descrição"
             value={descricao}
             onChangeText={setDescricao}
@@ -146,14 +151,78 @@ export default function Enviar() {
         </View>
 
         {/* Botão */}
-        <TouchableOpacity onPress={enviarTransacao} disabled={carregando}>
+        <TouchableOpacity
+          onPress={enviarTransacao}
+          disabled={carregando}
+          style={[styles.button, carregando && styles.buttonDisabled]}
+        >
           {carregando ? (
-            <Text>Enviando...</Text>
+            <Text style={styles.buttonText}>Enviando...</Text>
           ) : (
-            <Text>Enviar Dinheiro</Text>
+            <Text style={styles.buttonText}>Enviar Dinheiro</Text>
           )}
         </TouchableOpacity>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+    backgroundColor: '#ffffff',
+    justifyContent: 'center',
+  },
+  voltarButton: {
+    marginBottom: 20,
+  },
+  voltarText: {
+    fontSize: 16,
+    color: '#4a7df3',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#2e3e5c',
+    marginBottom: 8,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#7b8bb2',
+    marginBottom: 24,
+  },
+  inputContainer: {
+    marginBottom: 16,
+  },
+  label: {
+    fontSize: 14,
+    color: '#7b8bb2',
+    marginBottom: 8,
+  },
+  input: {
+    height: 48,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    fontSize: 16,
+    color: '#2e3e5c',
+    backgroundColor: '#f9f9f9',
+  },
+  button: {
+    backgroundColor: '#4a7df3',
+    paddingVertical: 14,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginTop: 24,
+  },
+  buttonDisabled: {
+    backgroundColor: '#b0c4de',
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});

@@ -1,4 +1,3 @@
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import React, { useState, useEffect } from 'react';
@@ -15,7 +14,6 @@ import {
     StatusBar,
 } from 'react-native';
 
-
 interface ITransacoesProps {
     categoria: string;
     contraparte: {
@@ -29,7 +27,6 @@ interface ITransacoesProps {
     valor: number;
 }
 
-
 export default function Transactions() {
     const [transacoes, setTransacoes] = useState<ITransacoesProps[]>([]);
     const [filtroAtual, setFiltroAtual] = useState('todas');
@@ -39,13 +36,14 @@ export default function Transactions() {
     const [pagina, setPagina] = useState(1);
     const [carregandoMais, setCarregandoMais] = useState(false);
     const [finalLista, setFinalLista] = useState(false);
-    const [token, setToken] = useState("");
+    const [token, setToken] = useState('');
 
     const router = useRouter();
 
-    const formatarMoeda = (valor: string) => {
-        return `R$ ${parseFloat(valor).toFixed(2).replace('.', ',')}`;
+    const formatarMoeda = (valor: number) => {
+        return `R$ ${valor.toFixed(2).replace('.', ',')}`; // Garantir que o valor seja tratado como número
     };
+    
 
     const formatarData = (dataString: string) => {
         const data = new Date(dataString);
@@ -53,7 +51,8 @@ export default function Transactions() {
     };
 
     const buscarTransacoes = async () => {
-        if (token === "") {
+        if (!token) {
+            console.log("Token não encontrado.");
             return;
         }
 
@@ -64,35 +63,33 @@ export default function Transactions() {
                 }
             });
             const dados = await resposta.json();
-
-            setTransacoes(dados)
+            setTransacoes(dados);
         } catch (erro) {
             console.error('Erro ao buscar transações:', erro);
-
         } finally {
             setCarregando(false);
             setCarregandoMais(false);
         }
     };
 
-    async function getToken() {
-        const token = await AsyncStorage.getItem("@token");
-
-        if (token === null || token === undefined) {
+    const getToken = async () => {
+        const storedToken = await AsyncStorage.getItem("@token");
+        if (!storedToken) {
             router.push("/Login");
-            return;
+        } else {
+            setToken(storedToken);
         }
-
-        setToken(token);
-    }
+    };
 
     useEffect(() => {
         getToken();
     }, []);
 
     useEffect(() => {
-        setPagina(1);
-        buscarTransacoes();
+        if (token) {
+            setPagina(1);
+            buscarTransacoes();
+        }
     }, [filtroAtual, token]);
 
     const onRefresh = async () => {
@@ -123,17 +120,11 @@ export default function Transactions() {
         return (
             <TouchableOpacity
                 style={styles.transacaoItem}
-                onPress={() => router.push('/TransactionDetail', { transacao: item })}
+                onPress={() => router.push('/(authenticated)/TransictionDetail', { transacao: item })}
             >
                 <View style={styles.transacaoIcone}>
-                    <View style={[
-                        styles.iconeCirculo,
-                        { backgroundColor: isEntrada ? 'rgba(75, 181, 67, 0.1)' : 'rgba(242, 78, 30, 0.1)' }
-                    ]}>
-                        <Text style={[
-                            styles.iconeTexto,
-                            { color: isEntrada ? '#4BB543' : '#F24E1E' }
-                        ]}>
+                    <View style={[styles.iconeCirculo, { backgroundColor: isEntrada ? 'rgba(75, 181, 67, 0.1)' : 'rgba(242, 78, 30, 0.1)' }]}>
+                        <Text style={[styles.iconeTexto, { color: isEntrada ? '#4BB543' : '#F24E1E' }]}>
                             {isEntrada ? '↓' : '↑'}
                         </Text>
                     </View>
@@ -144,10 +135,7 @@ export default function Transactions() {
                         <Text style={styles.transacaoDescricao} numberOfLines={1} ellipsizeMode="tail">
                             {item.descricao}
                         </Text>
-                        <Text style={[
-                            styles.transacaoValor,
-                            { color: isEntrada ? '#4BB543' : '#F24E1E' }
-                        ]}>
+                        <Text style={[styles.transacaoValor, { color: isEntrada ? '#4BB543' : '#F24E1E' }]}>
                             {isEntrada ? '+' : '-'}{formatarMoeda(item.valor)}
                         </Text>
                     </View>
@@ -182,42 +170,24 @@ export default function Transactions() {
 
             <View style={styles.filtros}>
                 <TouchableOpacity
-                    style={[
-                        styles.filtroBotao,
-                        filtroAtual === 'todas' && styles.filtroBotaoAtivo
-                    ]}
+                    style={[styles.filtroBotao, filtroAtual === 'todas' && styles.filtroBotaoAtivo]}
                     onPress={() => setFiltroAtual('todas')}
                 >
-                    <Text style={[
-                        styles.filtroTexto,
-                        filtroAtual === 'todas' && styles.filtroTextoAtivo
-                    ]}>Todas</Text>
+                    <Text style={[styles.filtroTexto, filtroAtual === 'todas' && styles.filtroTextoAtivo]}>Todas</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={[
-                        styles.filtroBotao,
-                        filtroAtual === 'entradas' && styles.filtroBotaoAtivo
-                    ]}
+                    style={[styles.filtroBotao, filtroAtual === 'recebidas' && styles.filtroBotaoAtivo]}
                     onPress={() => setFiltroAtual('recebidas')}
                 >
-                    <Text style={[
-                        styles.filtroTexto,
-                        filtroAtual === 'entradas' && styles.filtroTextoAtivo
-                    ]}>Entradas</Text>
+                    <Text style={[styles.filtroTexto, filtroAtual === 'recebidas' && styles.filtroTextoAtivo]}>Entradas</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={[
-                        styles.filtroBotao,
-                        filtroAtual === 'saidas' && styles.filtroBotaoAtivo
-                    ]}
+                    style={[styles.filtroBotao, filtroAtual === 'enviadas' && styles.filtroBotaoAtivo]}
                     onPress={() => setFiltroAtual('enviadas')}
                 >
-                    <Text style={[
-                        styles.filtroTexto,
-                        filtroAtual === 'saidas' && styles.filtroTextoAtivo
-                    ]}>Saídas</Text>
+                    <Text style={[styles.filtroTexto, filtroAtual === 'enviadas' && styles.filtroTextoAtivo]}>Saídas</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -241,10 +211,7 @@ export default function Transactions() {
             <StatusBar barStyle="dark-content" backgroundColor="#f8f9fa" />
 
             <View style={styles.header}>
-                <TouchableOpacity
-                    style={styles.backButton}
-                    onPress={() => router.back()}
-                >
+                <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
                     <Text style={styles.backButtonText}>←</Text>
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Histórico de Transações</Text>
@@ -260,61 +227,52 @@ export default function Transactions() {
                 <FlatList
                     data={transacoes}
                     renderItem={renderTransacao}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.id.toString()}
                     ListHeaderComponent={ListHeader}
                     ListFooterComponent={ListFooter}
                     contentContainerStyle={styles.listaConteudo}
                     refreshControl={
-                        <RefreshControl
-                            refreshing={atualizando}
-                            onRefresh={onRefresh}
-                            colors={['#4a7df3']}
-                        />
+                        <RefreshControl refreshing={atualizando} onRefresh={onRefresh} colors={['#4a7df3']} />
                     }
                     onEndReached={carregarMais}
                     onEndReachedThreshold={0.2}
                     ListEmptyComponent={
                         <View style={styles.semTransacoes}>
-                            <Text style={styles.semTransacoesTexto}>
-                                Nenhuma transação encontrada
-                            </Text>
+                            <Text style={styles.semTransacoesTexto}>Nenhuma transação encontrada</Text>
                         </View>
                     }
                 />
             )}
         </SafeAreaView>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f8f9fa',
+        backgroundColor: '#ffffff',
+        padding: 24,
     },
     header: {
+        marginBottom: 32,
         flexDirection: 'row',
-        alignItems: 'center',
         justifyContent: 'space-between',
-        paddingHorizontal: 20,
-        paddingVertical: 15,
-        backgroundColor: '#ffffff',
-        borderBottomWidth: 1,
-        borderBottomColor: '#f0f0f0',
+        alignItems: 'center',
     },
     backButton: {
-        padding: 5,
+        padding: 8,
     },
     backButtonText: {
         fontSize: 24,
-        color: '#4a7df3',
+        color: '#2e3e5c',
     },
     headerTitle: {
-        fontSize: 18,
+        fontSize: 24,
         fontWeight: 'bold',
         color: '#2e3e5c',
     },
     emptySpace: {
-        width: 20,
+        width: 40,
     },
     loadingContainer: {
         flex: 1,
@@ -322,67 +280,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     loadingText: {
-        marginTop: 10,
         fontSize: 16,
-        color: '#7b8bb2',
+        color: '#2e3e5c',
+        marginTop: 16,
     },
     listaConteudo: {
-        paddingBottom: 20,
-    },
-    buscaContainer: {
-        padding: 16,
-        backgroundColor: '#ffffff',
-        borderBottomWidth: 1,
-        borderBottomColor: '#f0f0f0',
-    },
-    inputBusca: {
-        backgroundColor: '#f5f5f5',
-        borderRadius: 8,
-        paddingHorizontal: 16,
-        paddingVertical: 10,
-        fontSize: 16,
-        marginBottom: 16,
-    },
-    filtros: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    filtroBotao: {
-        flex: 1,
-        alignItems: 'center',
-        paddingVertical: 8,
-        marginHorizontal: 4,
-        borderRadius: 8,
-        backgroundColor: '#f5f5f5',
-    },
-    filtroBotaoAtivo: {
-        backgroundColor: '#4a7df3',
-    },
-    filtroTexto: {
-        fontSize: 14,
-        color: '#7b8bb2',
-        fontWeight: '500',
-    },
-    filtroTextoAtivo: {
-        color: '#ffffff',
+        paddingBottom: 60,
     },
     transacaoItem: {
         flexDirection: 'row',
-        paddingVertical: 16,
-        paddingHorizontal: 16,
-        backgroundColor: '#ffffff',
-        marginHorizontal: 16,
-        marginTop: 8,
+        marginBottom: 16,
+        padding: 16,
         borderRadius: 12,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.05,
-        shadowRadius: 2,
-        elevation: 2,
+        backgroundColor: '#f9f9f9',
+        borderWidth: 1,
+        borderColor: '#e0e0e0',
     },
     transacaoIcone: {
-        marginRight: 12,
-        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 16,
     },
     iconeCirculo: {
         width: 40,
@@ -392,7 +309,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     iconeTexto: {
-        fontSize: 20,
+        fontSize: 24,
         fontWeight: 'bold',
     },
     transacaoInfo: {
@@ -401,15 +318,13 @@ const styles = StyleSheet.create({
     transacaoLinha1: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 4,
+        marginBottom: 8,
     },
     transacaoDescricao: {
         fontSize: 16,
-        color: '#2e3e5c',
         fontWeight: '500',
+        color: '#2e3e5c',
         flex: 1,
-        marginRight: 8,
     },
     transacaoValor: {
         fontSize: 16,
@@ -418,52 +333,79 @@ const styles = StyleSheet.create({
     transacaoLinha2: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: 6,
+        marginBottom: 8,
     },
     transacaoPessoa: {
         fontSize: 14,
         color: '#7b8bb2',
-        flex: 1,
-        marginRight: 8,
     },
     transacaoData: {
-        fontSize: 12,
-        color: '#a0a0a0',
+        fontSize: 14,
+        color: '#7b8bb2',
     },
     transacaoLinha3: {
         flexDirection: 'row',
     },
     categoriaTag: {
-        backgroundColor: '#f5f5f5',
-        paddingHorizontal: 8,
-        paddingVertical: 2,
-        borderRadius: 4,
+        backgroundColor: '#e0e0e0',
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        borderRadius: 12,
     },
     categoriaTexto: {
-        fontSize: 12,
-        color: '#2e3e5c',
-    },
-    footerLoader: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 16,
-    },
-    footerText: {
-        marginLeft: 8,
         fontSize: 14,
         color: '#7b8bb2',
     },
-    semTransacoes: {
-        padding: 40,
+    buscaContainer: {
+        marginBottom: 16,
+    },
+    inputBusca: {
+        height: 48,
+        borderWidth: 1,
+        borderColor: '#e0e0e0',
+        borderRadius: 12,
+        paddingHorizontal: 16,
+        fontSize: 16,
+        color: '#2e3e5c',
+        backgroundColor: '#f9f9f9',
+    },
+    filtros: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 16,
+    },
+    filtroBotao: {
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 12,
+        backgroundColor: '#f1f1f1',
+    },
+    filtroBotaoAtivo: {
+        backgroundColor: '#ec0c7a',
+    },
+    filtroTexto: {
+        fontSize: 14,
+        color: '#7b8bb2',
+    },
+    filtroTextoAtivo: {
+        color: '#ffffff',
+    },
+    footerLoader: {
+        marginVertical: 16,
         alignItems: 'center',
+    },
+    footerText: {
+        fontSize: 14,
+        color: '#7b8bb2',
+        marginTop: 8,
+    },
+    semTransacoes: {
         justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 50,
     },
     semTransacoesTexto: {
         fontSize: 16,
         color: '#7b8bb2',
-        textAlign: 'center',
     },
 });
-

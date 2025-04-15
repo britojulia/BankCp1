@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Alert,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 
 export default function Receber() {
@@ -49,45 +50,43 @@ export default function Receber() {
   };
 
   return (
-    <SafeAreaView>
-      <View>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Text>←</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => router.back()} style={styles.voltarButton}>
+          <Text style={styles.voltarText}>← Voltar</Text>
         </TouchableOpacity>
-        <Text>Receber Dinheiro</Text>
+        <Text style={styles.title}>Receber Dinheiro</Text>
       </View>
 
       {carregando ? (
-        <View>
+        <View style={styles.carregandoContainer}>
           <ActivityIndicator size="large" color="#4a7df3" />
-          <Text>Carregando suas informações...</Text>
+          <Text style={styles.carregandoText}>Carregando suas informações...</Text>
         </View>
       ) : (
         <View>
-          <View>
-            <Text>Receber como</Text>
-            <Text>{nomeUsuario}</Text>
+          <View style={styles.dadosContainer}>
+            <Text style={styles.dadosTitle}>Receber como</Text>
+            <Text style={styles.dadosText}>{nomeUsuario}</Text>
           </View>
 
-          <View>
-            <View>
-              <Text>QR Code</Text>
-              <Text>(Simulação)</Text>
-            </View>
-            <Text>Peça para a pessoa escanear este QR Code</Text>
+          <View style={styles.qrContainer}>
+            <Text style={styles.qrTitle}>QR Code</Text>
+            <Text style={styles.qrSubtitle}>(Simulação)</Text>
+            <Text style={styles.qrText}>Peça para a pessoa escanear este QR Code</Text>
           </View>
 
-          <View>
-            <Text>Seu Apelido</Text>
-            <View>
-              <Text>{apelido}</Text>
-              <TouchableOpacity onPress={copiarApelido}>
-                <Text>Copiar</Text>
+          <View style={styles.apelidoContainer}>
+            <Text style={styles.apelidoTitle}>Seu Apelido</Text>
+            <View style={styles.apelidoContent}>
+              <Text style={styles.apelidoText}>{apelido}</Text>
+              <TouchableOpacity onPress={copiarApelido} style={styles.copiarButton}>
+                <Text style={styles.copiarText}>Copiar</Text>
               </TouchableOpacity>
             </View>
-            <Text>Ou compartilhe seu apelido diretamente</Text>
-            <TouchableOpacity onPress={compartilharApelido}>
-              <Text>Compartilhar Apelido</Text>
+            <Text style={styles.apelidoShareText}>Ou compartilhe seu apelido diretamente</Text>
+            <TouchableOpacity onPress={compartilharApelido} style={styles.compSharingButton}>
+              <Text style={styles.compSharingText}>Compartilhar Apelido</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -95,3 +94,111 @@ export default function Receber() {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 24,
+    backgroundColor: '#ffffff',
+  },
+  voltarButton: {
+    marginBottom: 20,
+  },
+  voltarText: {
+    fontSize: 16,
+    color: '#4a7df3',
+  },
+  header: {
+    marginBottom: 32,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#2e3e5c',
+    marginBottom: 8,
+  },
+  carregandoContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 50,
+  },
+  carregandoText: {
+    fontSize: 16,
+    color: '#7b8bb2',
+    marginTop: 8,
+  },
+  dadosContainer: {
+    marginBottom: 24,
+  },
+  dadosTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#2e3e5c',
+  },
+  dadosText: {
+    fontSize: 16,
+    color: '#7b8bb2',
+  },
+  qrContainer: {
+    marginBottom: 24,
+  },
+  qrTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#2e3e5c',
+  },
+  qrSubtitle: {
+    fontSize: 14,
+    color: '#7b8bb2',
+  },
+  qrText: {
+    fontSize: 16,
+    color: '#7b8bb2',
+    marginTop: 8,
+  },
+  apelidoContainer: {
+    marginBottom: 24,
+  },
+  apelidoTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#2e3e5c',
+  },
+  apelidoContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  apelidoText: {
+    fontSize: 16,
+    color: '#2e3e5c',
+    marginRight: 10,
+  },
+  copiarButton: {
+    backgroundColor: '#4a7df3',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+  },
+  copiarText: {
+    color: '#ffffff',
+    fontSize: 14,
+  },
+  apelidoShareText: {
+    fontSize: 14,
+    color: '#7b8bb2',
+    marginTop: 8,
+  },
+  compSharingButton: {
+    backgroundColor: '#4a7df3',
+    paddingVertical: 12,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginTop: 16,
+  },
+  compSharingText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
