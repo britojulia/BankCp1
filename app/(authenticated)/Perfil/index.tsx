@@ -1,3 +1,4 @@
+import Footer from "@/components/Rodape";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -94,6 +95,7 @@ export default function Perfil() {
             <TouchableOpacity onPress={handleSalvar} disabled={carregando} style={[styles.button, carregando && styles.buttonDisabled]}>
                 <Text style={styles.buttonText}>{carregando ? 'Salvando...' : 'Salvar'}</Text>
             </TouchableOpacity>
+            <Footer/>
         </SafeAreaView>
     );
 }

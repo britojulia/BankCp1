@@ -1,3 +1,4 @@
+import Footer from "@/components/Rodape";
 import { useAuth } from "@/hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
@@ -162,6 +163,7 @@ export default function Enviar() {
             <Text style={styles.buttonText}>Enviar Dinheiro</Text>
           )}
         </TouchableOpacity>
+        <Footer/>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );

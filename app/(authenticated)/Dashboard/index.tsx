@@ -1,3 +1,4 @@
+import Footer from "@/components/Rodape";
 import { useAuth } from "@/hooks/useAuth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
@@ -179,7 +180,9 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
                     />
                 )}
             </View>
+            <Footer/>
         </SafeAreaView>
+        
     );
 }
 

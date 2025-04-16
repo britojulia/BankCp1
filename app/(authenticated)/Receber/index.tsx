@@ -1,3 +1,4 @@
+import Footer from '@/components/Rodape';
 import { useRouter } from 'expo-router';
 import React, { useState, useEffect } from 'react';
 import {
@@ -91,6 +92,7 @@ export default function Receber() {
           </View>
         </View>
       )}
+      <Footer/>
     </SafeAreaView>
   );
 }

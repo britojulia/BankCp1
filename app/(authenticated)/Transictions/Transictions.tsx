@@ -1,3 +1,4 @@
+import Footer from '@/components/Rodape';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import React, { useState, useEffect } from 'react';
@@ -237,6 +238,7 @@ export default function Transactions() {
                     }
                 />
             )}
+            <Footer/>
         </SafeAreaView>
     );
 }
