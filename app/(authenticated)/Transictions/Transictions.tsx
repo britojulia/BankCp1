@@ -205,9 +205,9 @@ export default function Transactions() {
             <StatusBar barStyle="dark-content" backgroundColor="#f8f9fa" />
 
             <View style={styles.header}>
-                <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-                    <Text style={styles.backButtonText}>←</Text>
-                </TouchableOpacity>
+            <TouchableOpacity onPress={() => router.back()} style={styles.voltarButton}>
+          <Text style={styles.voltarText}>← Voltar</Text>
+        </TouchableOpacity>
                 <Text style={styles.headerTitle}>Histórico de Transações</Text>
                 <View style={styles.emptySpace} />
             </View>
@@ -243,19 +243,23 @@ export default function Transactions() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#ffffff',
-        padding: 24,
+    flex: 1,
+    padding: 24,
+    backgroundColor: '#ffffff',
     },
+    voltarButton: {
+        marginBottom: 30,
+      },
     header: {
         marginBottom: 32,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    backButton: {
-        padding: 8,
-    },
+    voltarText: {
+        fontSize: 16,
+        color: '#ec0c7a',
+      },
     backButtonText: {
         fontSize: 24,
         color: '#2e3e5c',
@@ -264,6 +268,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: '#2e3e5c',
+        marginBottom: 8,
+
     },
     emptySpace: {
         width: 40,

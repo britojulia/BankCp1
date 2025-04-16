@@ -118,9 +118,9 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
 
             {/* Cabeçalho */}
             <View style={styles.header}>
-                <Text style={styles.title}>Olá!</Text>
+                <Text style={styles.title}>Olá! 👋 </Text>
                 <Text style={styles.subtitle}>{usuario?.nome}</Text>
-            </View>
+            
 
             {/* Saldo */}
             <View style={styles.cardSaldo}>
@@ -132,7 +132,7 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
                         <Text style={styles.valorSaldo}>{formatarMoeda(String(saldo))}</Text>
                     )}
                 </View>
-                <TouchableOpacity onPress={buscarSaldo} style={styles.button}>
+                <TouchableOpacity onPress={buscarSaldo}>
                     <Text style={styles.buttonText}>Atualizar</Text>
                 </TouchableOpacity>
             </View>
@@ -140,11 +140,12 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
             {/* Transferir / Receber */}
             <View style={styles.botoesTransacao}>
                 <TouchableOpacity onPress={() => router.push('/Enviar')} style={styles.button}>
-                    <Text style={styles.buttonText}>Transferir</Text>
+                    <Text style={styles.buttonText}>Transferir →</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => router.push('/Receber')} style={styles.button}>
-                    <Text style={styles.buttonText}>Receber</Text>
+                    <Text style={styles.buttonText}>Receber ←</Text>
                 </TouchableOpacity>
+            </View>
             </View>
 
             {/* Transações */}
@@ -189,42 +190,54 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     header: {
-        alignItems: 'center',
+        backgroundColor: '#5a45fe',
+        display: 'flex',
+        justifyContent: 'flex-start',
         marginBottom: 32,
     },
     title: {
         fontSize: 24,
+        color: 'white',
+        marginTop: 20,
+        marginLeft: 20, 
+        paddingHorizontal: 10,
+      },
+    titleName:{
+        fontSize: 24,
         fontWeight: 'bold',
-        color: '#2e3e5c',
-        marginBottom: 8,
+        color: 'white',
+        marginTop: 20,
+        marginLeft: 20, 
+        paddingHorizontal: 10,
     },
     subtitle: {
         fontSize: 16,
-        color: '#7b8bb2',
+        color: 'white',
+        paddingHorizontal: 10,
     },
     cardSaldo: {
         marginHorizontal: 20,
         marginBottom: 20,
     },
     tituloSaldo: {
-        fontSize: 16,
-        color: '#333',
+        fontSize: 18,
+        color: 'white',
     },
     cardConteudo: {
         padding: 20,
-        backgroundColor: '#f5f5f5',
+        
         borderRadius: 12,
         alignItems: 'center',
     },
     valorSaldo: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#ec0c7a',
+        color: 'white',
     },
     button: {
         backgroundColor: '#ec0c7a',
         paddingVertical: 14,
-        borderRadius: 12,
+        borderRadius: 19,
         alignItems: 'center',
         marginTop: 10,
     },
@@ -232,13 +245,21 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 16,
         fontWeight: 'bold',
+        padding: 1,
+        paddingHorizontal: 10,
     },
     botoesTransacao: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginHorizontal: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: 40,
         marginBottom: 20,
-    },
+        backgroundColor: '#7b6afe',
+        borderRadius: 10,
+        padding: 20,
+        gap: 60, // <<< adiciona espaço entre os botões
+      },
+
     transacoesContainer: {
         flex: 1,
     },
@@ -249,7 +270,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     tituloTransacoes: {
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: 'bold',
     },
     carregando: {
