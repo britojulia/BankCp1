@@ -60,7 +60,7 @@ export default function Enviar() {
     setCarregando(true);
 
     try {
-      const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Transfer%C3%AAncias/TransferenciasController_create', {
+      const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/transferencias', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ export default function Enviar() {
     const t = await AsyncStorage.getItem("@token");
 
     if (!t) {
-      router.push("/Login");
+      router.push("/Dashboard");
       return;
     }
 

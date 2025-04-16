@@ -47,7 +47,7 @@ const buscarSaldo = async () => {
 
     setCarregandoSaldo(true);
     try {
-        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Contas/ContasController_getSaldo', {
+        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/contas/saldo', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -71,7 +71,7 @@ const buscarTransacoes = async () => {
 
     setCarregandoTransacoes(true);
     try {
-        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Contas/ContasController_getResumoTransacoes', {
+        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/contas/resumos-transacoes', {
             headers: {
                 "Authorization": `Bearer ${token}`
             }

@@ -16,7 +16,7 @@ export default function Perfil() {
     async function handleSalvar() {
         setCarregando(true);
         try {
-            const response = await fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Contas/ContasController_updatePerfil", {
+            const response = await fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/contas/perfil", {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',

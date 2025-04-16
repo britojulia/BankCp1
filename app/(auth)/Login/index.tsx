@@ -13,10 +13,10 @@ export default function Login() {
   const { handleLogin } = useAuth();
 
   async function submit() {
-  //  if(!isSaved) {
+  
     await AsyncStorage.setItem("@mock-bank-password", senha);
     await AsyncStorage.setItem("@mock-bank-apelido", apelido);
-  //  }
+
 
     handleLogin(apelido, senha);
   }

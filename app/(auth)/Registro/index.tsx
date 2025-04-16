@@ -52,7 +52,7 @@ export default function Registro() {
 
       const userData = { nome, cpf, apelido, senha };
 
-      const response = await fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Contas/ContasController_create", {
+      const response = await fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/contas", {
         method: "POST",
         headers: {
           'Content-Type': "application/json"

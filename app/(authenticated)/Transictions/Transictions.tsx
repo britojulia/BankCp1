@@ -56,7 +56,7 @@ export default function Transactions() {
         }
 
         try {
-            const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Transfer%C3%AAncias/TransferenciasController_getTransacoes', {
+            const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/transferencias', {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }
@@ -74,7 +74,7 @@ export default function Transactions() {
     const getToken = async () => {
         const storedToken = await AsyncStorage.getItem("@token");
         if (!storedToken) {
-            router.push("/Login");
+            router.push("/Dashboard");
         } else {
             setToken(storedToken);
         }
