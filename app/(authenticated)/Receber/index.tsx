@@ -39,7 +39,6 @@ export default function Receber() {
 
   const compartilharApelido = async () => {
     try {
-      // Aqui você pode usar o `Share` do React Native
       Alert.alert('Compartilhar', `Apelido: ${apelido}`);
     } catch (erro) {
       Alert.alert('Erro', 'Não foi possível compartilhar sua chave Pix');
@@ -52,47 +51,49 @@ export default function Receber() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()} style={styles.voltarButton}>
-          <Text style={styles.voltarText}>← Voltar</Text>
-        </TouchableOpacity>
-        <Text style={styles.title}>Receber Dinheiro</Text>
-      </View>
-
-      {carregando ? (
-        <View style={styles.carregandoContainer}>
-          <ActivityIndicator size="large" color="#4a7df3" />
-          <Text style={styles.carregandoText}>Carregando suas informações...</Text>
+      <View style={styles.conteudo}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => router.back()} style={styles.voltarButton}>
+            <Text style={styles.voltarText}>← Voltar</Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>Receber Dinheiro</Text>
         </View>
-      ) : (
-        <View>
-          <View style={styles.dadosContainer}>
-            <Text style={styles.dadosTitle}>Receber como</Text>
-            <Text style={styles.dadosText}>{nomeUsuario}</Text>
-          </View>
 
-          <View style={styles.qrContainer}>
-            <Text style={styles.qrTitle}>QR Code</Text>
-            <Text style={styles.qrSubtitle}>(Simulação)</Text>
-            <Text style={styles.qrText}>Peça para a pessoa escanear este QR Code</Text>
+        {carregando ? (
+          <View style={styles.carregandoContainer}>
+            <ActivityIndicator size="large" color="#4a7df3" />
+            <Text style={styles.carregandoText}>Carregando suas informações...</Text>
           </View>
+        ) : (
+          <View>
+            <View style={styles.dadosContainer}>
+              <Text style={styles.dadosTitle}>Receber como</Text>
+              <Text style={styles.dadosText}>{nomeUsuario}</Text>
+            </View>
 
-          <View style={styles.apelidoContainer}>
-            <Text style={styles.apelidoTitle}>Seu Apelido</Text>
-            <View style={styles.apelidoContent}>
-              <Text style={styles.apelidoText}>{apelido}</Text>
-              <TouchableOpacity onPress={copiarApelido} style={styles.copiarButton}>
-                <Text style={styles.copiarText}>Copiar</Text>
+            <View style={styles.qrContainer}>
+              <Text style={styles.qrTitle}>QR Code</Text>
+              <Text style={styles.qrSubtitle}>(Simulação)</Text>
+              <Text style={styles.qrText}>Peça para a pessoa escanear este QR Code</Text>
+            </View>
+
+            <View style={styles.apelidoContainer}>
+              <Text style={styles.apelidoTitle}>Seu Apelido</Text>
+              <View style={styles.apelidoContent}>
+                <Text style={styles.apelidoText}>{apelido}</Text>
+                <TouchableOpacity onPress={copiarApelido} style={styles.copiarButton}>
+                  <Text style={styles.copiarText}>Copiar</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.apelidoShareText}>Ou compartilhe seu apelido diretamente</Text>
+              <TouchableOpacity onPress={compartilharApelido} style={styles.compSharingButton}>
+                <Text style={styles.compSharingText}>Compartilhar Apelido</Text>
               </TouchableOpacity>
             </View>
-            <Text style={styles.apelidoShareText}>Ou compartilhe seu apelido diretamente</Text>
-            <TouchableOpacity onPress={compartilharApelido} style={styles.compSharingButton}>
-              <Text style={styles.compSharingText}>Compartilhar Apelido</Text>
-            </TouchableOpacity>
           </View>
-        </View>
-      )}
-      <Footer/>
+        )}
+      </View>
+      <Footer />
     </SafeAreaView>
   );
 }
@@ -100,8 +101,11 @@ export default function Receber() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 24,
     backgroundColor: '#ffffff',
+  },
+  conteudo: {
+    flex: 1,
+    paddingHorizontal: 16,
   },
   voltarButton: {
     marginBottom: 20,
@@ -118,6 +122,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#2e3e5c',
     marginBottom: 8,
+    alignItems: 'center',
+    
   },
   carregandoContainer: {
     alignItems: 'center',

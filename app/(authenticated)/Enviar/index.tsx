@@ -16,7 +16,7 @@ import {
 } from "react-native";
 
 export default function Enviar() {
-  const [emailDestino, setEmailDestino] = useState('');
+  const [contaDestino, setContaDestino] = useState('');
   const [valor, setValor] = useState('');
   const [descricao, setDescricao] = useState('');
   const [token, setToken] = useState('');
@@ -35,8 +35,8 @@ export default function Enviar() {
   };
 
   const enviarTransacao = async () => {
-    if (!emailDestino.trim()) {
-      Alert.alert('Erro', 'Informe o e-mail do destinatário');
+    if (!contaDestino.trim()) {
+      Alert.alert('Erro', 'Informe a conta de destino');
       return;
     }
 
@@ -53,7 +53,7 @@ export default function Enviar() {
     }
 
     const dados = {
-      emailDestino,
+      contaDestino, 
       valor: valorNumerico,
       descricao,
     };
@@ -65,7 +65,7 @@ export default function Enviar() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(dados),
       });
@@ -73,7 +73,6 @@ export default function Enviar() {
       if (!resposta.ok) {
         throw new Error('Erro na requisição');
       }
-
       const resultado = await resposta.json();
 
       Alert.alert('Sucesso', 'Transação realizada com sucesso', [
@@ -127,14 +126,14 @@ export default function Enviar() {
           />
         </View>
 
-        {/* E-mail do destinatário */}
+        {/* Conta de destino */}
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Para quem você deseja enviar?</Text>
           <TextInput
             style={styles.input}
-            placeholder="E-mail do destinatário"
-            value={emailDestino}
-            onChangeText={setEmailDestino}
+            placeholder="Conta de destino"
+            value={contaDestino}
+            onChangeText={setContaDestino}
             autoCapitalize="none"
             autoCorrect={false}
           />
@@ -163,7 +162,7 @@ export default function Enviar() {
             <Text style={styles.buttonText}>Enviar Dinheiro</Text>
           )}
         </TouchableOpacity>
-        <Footer/>
+        <Footer />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -173,8 +172,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: '#ffffff',
-    justifyContent: 'center',
+    backgroundColor: 'white',
+    justifyContent: 'flex-start', 
   },
   voltarButton: {
     marginBottom: 20,
@@ -183,19 +182,27 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#ec0c7a',
   },
+  
+  titlesContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#2e3e5c',
     marginBottom: 8,
+    textAlign: 'center', 
   },
   subtitle: {
     fontSize: 16,
-    color: '#7b8bb2',
-    marginBottom: 24,
+    color: '#ec0c7a',
+    textAlign: 'center',
   },
   inputContainer: {
     marginBottom: 16,
+    marginHorizontal: 16, 
   },
   label: {
     fontSize: 14,
@@ -218,6 +225,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     marginTop: 24,
+    marginHorizontal: 16, 
   },
   buttonDisabled: {
     backgroundColor: '#b0c4de',

@@ -318,7 +318,7 @@ const styles = StyleSheet.create({
     },
     transacaoData: {
       fontSize: 12,
-      color: '#7b8bb2',
+      color: '#rgba(189, 181, 255, 1)',
     },
   });
   
