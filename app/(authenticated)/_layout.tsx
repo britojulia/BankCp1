@@ -4,11 +4,11 @@ import { Stack } from "expo-router";
      return(
          <Stack>
              <Stack.Screen name="Dashboard/index" options={{ headerShown: false }} />
-             <Stack.Screen name="Profile/index" options={{ headerShown: false }} />
-             <Stack.Screen name="Recive/index" options={{ headerShown: false }} />
-             <Stack.Screen name="Send/index" options={{ headerShown: false }} />
-             <Stack.Screen name="TransactionDetail/index" options={{ headerShown: false }} />
-             <Stack.Screen name="Transactions/index" options={{ headerShown: false }} />
+             <Stack.Screen name="Perfil/index" options={{ headerShown: false }} />
+             <Stack.Screen name="Receber/index" options={{ headerShown: false }} />
+             <Stack.Screen name="Enviar/index" options={{ headerShown: false }} />
+             <Stack.Screen name="TransictionDetail/index" options={{ headerShown: false }} />
+             <Stack.Screen name="Transictions/Transictions" options={{ headerShown: false }} />
          </Stack>
      )
  }

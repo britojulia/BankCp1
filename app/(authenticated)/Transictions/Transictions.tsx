@@ -120,7 +120,7 @@ export default function Transactions() {
         return (
             <TouchableOpacity
                 style={styles.transacaoItem}
-                onPress={() => router.push('/(authenticated)/TransictionDetail')}
+                onPress={() => router.push('/TransictionDetail')}
             >
                 <View style={styles.transacaoIcone}>
                     <View style={[styles.iconeCirculo, { backgroundColor: isEntrada ? 'rgba(75, 181, 67, 0.1)' : 'rgba(242, 78, 30, 0.1)' }]}>
@@ -245,169 +245,175 @@ export default function Transactions() {
 
 const styles = StyleSheet.create({
     container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: '#ffffff',
+      flex: 1,
+      padding: 24,
+      marginHorizontal: 16, // Distância da borda esquerda e direita
+      marginTop: 16, // Distância da borda superior
+      marginBottom: 16, // Distância da borda inferior
+      backgroundColor: '#fff',
     },
     voltarButton: {
-        marginBottom: 30,
-      },
-    header: {
-        marginBottom: 32,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+      marginBottom: 24,
     },
     voltarText: {
-        fontSize: 16,
-        color: '#ec0c7a',
-      },
+      fontSize: 16,
+      color: '#ec0c7a',
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 24,
+    },
     backButtonText: {
-        fontSize: 24,
-        color: '#2e3e5c',
+      fontSize: 24,
+      color: '#2e3e5c',
     },
     headerTitle: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#2e3e5c',
-        marginBottom: 8,
-
+      fontSize: 22,
+      fontWeight: 'bold',
+      color: '#2e3e5c',
     },
     emptySpace: {
-        width: 40,
-    },
-    loadingContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    loadingText: {
-        fontSize: 16,
-        color: '#2e3e5c',
-        marginTop: 16,
-    },
-    listaConteudo: {
-        paddingBottom: 60,
-    },
-    transacaoItem: {
-        flexDirection: 'row',
-        marginBottom: 16,
-        padding: 16,
-        borderRadius: 12,
-        backgroundColor: '#f9f9f9',
-        borderWidth: 1,
-        borderColor: '#e0e0e0',
-    },
-    transacaoIcone: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: 16,
-    },
-    iconeCirculo: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    iconeTexto: {
-        fontSize: 24,
-        fontWeight: 'bold',
-    },
-    transacaoInfo: {
-        flex: 1,
-    },
-    transacaoLinha1: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 8,
-    },
-    transacaoDescricao: {
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#2e3e5c',
-        flex: 1,
-    },
-    transacaoValor: {
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    transacaoLinha2: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 8,
-    },
-    transacaoPessoa: {
-        fontSize: 14,
-        color: '#7b8bb2',
-    },
-    transacaoData: {
-        fontSize: 14,
-        color: '#7b8bb2',
-    },
-    transacaoLinha3: {
-        flexDirection: 'row',
-    },
-    categoriaTag: {
-        backgroundColor: '#e0e0e0',
-        paddingHorizontal: 12,
-        paddingVertical: 6,
-        borderRadius: 12,
-    },
-    categoriaTexto: {
-        fontSize: 14,
-        color: '#7b8bb2',
+      width: 40,
     },
     buscaContainer: {
-        marginBottom: 16,
+      marginBottom: 16,
     },
     inputBusca: {
-        height: 48,
-        borderWidth: 1,
-        borderColor: '#e0e0e0',
-        borderRadius: 12,
-        paddingHorizontal: 16,
-        fontSize: 16,
-        color: '#2e3e5c',
-        backgroundColor: '#f9f9f9',
+      height: 48,
+      borderRadius: 12,
+      paddingHorizontal: 16,
+      backgroundColor: '#f2f4f8',
+      fontSize: 16,
+      color: '#2e3e5c',
     },
     filtros: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 16,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginTop: 12,
+      marginBottom: 16,
     },
     filtroBotao: {
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-        borderRadius: 12,
-        backgroundColor: '#f1f1f1',
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      borderRadius: 20,
+      backgroundColor: '#f2f4f8',
     },
     filtroBotaoAtivo: {
-        backgroundColor: '#ec0c7a',
+      backgroundColor: '#ec0c7a',
     },
     filtroTexto: {
-        fontSize: 14,
-        color: '#7b8bb2',
+      fontSize: 14,
+      color: '#7b8bb2',
     },
     filtroTextoAtivo: {
-        color: '#ffffff',
+      color: '#fff',
+    },
+    listaConteudo: {
+      paddingBottom: 100,
+    },
+    transacaoItem: {
+      flexDirection: 'row',
+      marginBottom: 16,
+      padding: 16,
+      backgroundColor: '#fff',
+      borderRadius: 16,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.05,
+      shadowRadius: 6,
+      elevation: 3,
+    },
+    transacaoIcone: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: 16,
+    },
+    iconeCirculo: {
+      width: 48,
+      height: 48,
+      borderRadius: 24,
+      backgroundColor: '#ec0c7a',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    iconeTexto: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#fff',
+    },
+    transacaoInfo: {
+      flex: 1,
+    },
+    transacaoLinha1: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 4,
+    },
+    transacaoDescricao: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: '#2e3e5c',
+    },
+    transacaoValor: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#2e3e5c',
+    },
+    transacaoLinha2: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 4,
+    },
+    transacaoPessoa: {
+      fontSize: 14,
+      color: '#9aa5c4',
+    },
+    transacaoData: {
+      fontSize: 14,
+      color: '#9aa5c4',
+    },
+    transacaoLinha3: {
+      flexDirection: 'row',
+    },
+    categoriaTag: {
+      backgroundColor: '#edf1f7',
+      paddingHorizontal: 12,
+      paddingVertical: 4,
+      borderRadius: 16,
+    },
+    categoriaTexto: {
+      fontSize: 13,
+      color: '#7b8bb2',
+    },
+    loadingContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loadingText: {
+      fontSize: 16,
+      color: '#2e3e5c',
+      marginTop: 16,
     },
     footerLoader: {
-        marginVertical: 16,
-        alignItems: 'center',
+      marginVertical: 16,
+      alignItems: 'center',
     },
     footerText: {
-        fontSize: 14,
-        color: '#7b8bb2',
-        marginTop: 8,
+      fontSize: 14,
+      color: '#7b8bb2',
+      marginTop: 8,
     },
     semTransacoes: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingVertical: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingVertical: 50,
     },
     semTransacoesTexto: {
-        fontSize: 16,
-        color: '#7b8bb2',
+      fontSize: 16,
+      color: '#7b8bb2',
     },
-});
+  });
+  

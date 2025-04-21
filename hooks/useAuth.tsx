@@ -39,7 +39,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
          const token = await AsyncStorage.getItem("@token");
  
          if (token === null || token === undefined) {
-             router.push("/(auth)/Login");
+             router.push("/Login");
              return;
          }
  
@@ -60,7 +60,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
              }
  
              const response = await
-                 fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Autentica%C3%A7%C3%A3o/AuthController_login", {
+                 fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/auth/login", {
                      method: "POST",
                      headers: {
                          'Content-Type': "application/json"
@@ -93,7 +93,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
          try {
  
              const response = await
-                 fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/api#/Contas/ContasController_getPerfil", {
+                 fetch("https://mock-bank-mock-back.yexuz7.easypanel.host/contas/perfil", {
+                    method: "GET",
                      headers: {
                          'Content-Type': "application/json",
                          'Authorization': `Bearer ${token}`

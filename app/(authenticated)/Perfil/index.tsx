@@ -102,6 +102,7 @@ export default function Perfil() {
 
 const styles = StyleSheet.create({
     container: {
+        gap: 2,
         flex: 1,
         padding: 24,
         backgroundColor: '#ffffff',

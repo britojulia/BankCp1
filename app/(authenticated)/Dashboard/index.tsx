@@ -119,8 +119,11 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
 
             {/* Cabeçalho */}
             <View style={styles.header}>
+                <View  style={styles.userInfo}>
                 <Text style={styles.title}>Olá! 👋 </Text>
                 <Text style={styles.subtitle}>{usuario?.nome}</Text>
+                </View>
+               
             
 
             {/* Saldo */}
@@ -134,7 +137,7 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
                     )}
                 </View>
                 <TouchableOpacity onPress={buscarSaldo}>
-                    <Text style={styles.buttonText}>Atualizar</Text>
+                    <Text style={styles.buttonAtualizar}>Atualizar</Text>
                 </TouchableOpacity>
             </View>
 
@@ -153,7 +156,7 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
             <View style={styles.transacoesContainer}>
                 <View style={styles.transacoesHeader}>
                     <Text style={styles.tituloTransacoes}>Transações</Text>
-                    <TouchableOpacity onPress={() => router.push('/(authenticated)/Transictions/Transictions')}>
+                    <TouchableOpacity onPress={() => router.push('/Transictions/Transictions')}>
                         <Text style={styles.redirectText}>Ver todas</Text>
                     </TouchableOpacity>
                 </View>
@@ -186,130 +189,136 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
     );
 }
 
-// Estilos
+
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#ffffff',
+      flex: 1,
+      backgroundColor: '#ffffff',
     },
     header: {
-        backgroundColor: '#5a45fe',
-        display: 'flex',
-        justifyContent: 'flex-start',
-        marginBottom: 32,
+      backgroundColor: '#5a45fe',
+      display: 'flex',
+      justifyContent: 'flex-start',
+      marginBottom: 32,
     },
     title: {
-        fontSize: 24,
-        color: 'white',
-        marginTop: 20,
-        marginLeft: 20, 
-        paddingHorizontal: 10,
-      },
-    titleName:{
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: 'white',
-        marginTop: 20,
-        marginLeft: 20, 
-        paddingHorizontal: 10,
+      fontSize: 20,
+      color: 'rgba(189, 181, 255, 1)',
+      marginTop: 30,
+      marginLeft: 10,
     },
     subtitle: {
-        fontSize: 16,
-        color: 'white',
-        paddingHorizontal: 10,
+      fontSize: 30,
+      color: 'white',
+      marginLeft: 10,
+      fontWeight: 'bold',
     },
+    userInfo: {
+        paddingTop: 30,
+        paddingLeft: 20,
+        paddingBottom: 30,
+      },
+      
     cardSaldo: {
-        marginHorizontal: 20,
-        marginBottom: 20,
+      marginHorizontal: 20,
+      marginBottom: 20,
+      alignItems: 'flex-start',
+      
     },
     tituloSaldo: {
-        fontSize: 18,
-        color: 'white',
+      fontSize: 18,
+      color: '#d0cfff',
+      marginLeft: 10,
     },
     cardConteudo: {
-        padding: 20,
-        
+        paddingTop: 10,
         borderRadius: 12,
-        alignItems: 'center',
-    },
+        width: '100%',
+      },
     valorSaldo: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: 'white',
+      fontSize: 40,
+      fontWeight: 'bold',
+      color: 'white',
+      marginLeft: 10,
     },
-    button: {
-        backgroundColor: '#ec0c7a',
-        paddingVertical: 14,
-        borderRadius: 19,
-        alignItems: 'center',
+    buttonAtualizar: {
+        marginLeft: 10,
+        color: 'rgba(189, 181, 255, 1)',
+        fontWeight: 'bold',
         marginTop: 10,
     },
-    buttonText: {
-        color: '#ffffff',
-        fontSize: 16,
-        fontWeight: 'bold',
-        padding: 1,
-        paddingHorizontal: 10,
-    },
     botoesTransacao: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginHorizontal: 40,
-        marginBottom: 20,
-        backgroundColor: '#7b6afe',
-        borderRadius: 10,
-        padding: 20,
-        gap: 60, // <<< adiciona espaço entre os botões
-      },
-
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginHorizontal: 40,
+      marginBottom: 20,
+      backgroundColor: '#7b6afe',
+      borderRadius: 10,
+      padding: 12,
+      gap: 16,
+    },
+    button: {
+      flex: 1,
+      backgroundColor: '#ec0c7a',
+      paddingVertical: 12,
+      borderRadius: 12,
+      alignItems: 'center',
+      marginHorizontal: 6,
+      elevation: 2,
+    },
+    buttonText: {
+      color: '#ffffff',
+      fontSize: 16,
+      fontWeight: '600',
+    },
     transacoesContainer: {
-        flex: 1,
+      flex: 1,
     },
     transacoesHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginHorizontal: 20,
-        marginBottom: 10,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginHorizontal: 20,
+      marginBottom: 10,
     },
     tituloTransacoes: {
-        fontSize: 22,
-        fontWeight: 'bold',
+      fontSize: 22,
+      fontWeight: 'bold',
     },
     carregando: {
-        marginTop: 20,
+      marginTop: 20,
     },
     semTransacoes: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 20,
     },
     semTransacoesTexto: {
-        color: '#666',
-        fontSize: 16,
+      color: '#666',
+      fontSize: 16,
     },
     redirectText: {
-        fontSize: 14,
-        color: '#ec0c7a',
-        fontWeight: '500',
+      fontSize: 14,
+      color: '#ec0c7a',
+      fontWeight: '500',
     },
     transacaoItem: {
-        padding: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: '#e0e0e0',
+      padding: 16,
+      borderBottomWidth: 1,
+      borderBottomColor: '#e0e0e0',
     },
     transacaoDescricao: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#333',
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: '#333',
     },
     transacaoValor: {
-        fontSize: 14,
-        color: '#ec0c7a',
+      fontSize: 14,
+      color: '#ec0c7a',
     },
     transacaoData: {
-        fontSize: 12,
-        color: '#7b8bb2',
+      fontSize: 12,
+      color: '#7b8bb2',
     },
-});
+  });
+  

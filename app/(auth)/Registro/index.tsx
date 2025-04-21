@@ -68,7 +68,7 @@ export default function Registro() {
       Alert.alert(
         'Cadastro realizado',
         `Usuário ${apelido} cadastrado com sucesso!`,
-        [{ text: 'OK', onPress: () => router.push("/Login") }]
+        [{ text: 'OK', onPress: () => router.push("/Dashboard") }]
       );
     } catch (error) {
       const msg = error instanceof Error ? error.message : 'Erro inesperado';
