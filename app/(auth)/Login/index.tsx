@@ -33,6 +33,7 @@ export default function Login() {
         <TextInput
           style={styles.input}
           placeholder="Digite seu apelido"
+          placeholderTextColor="black" 
           value={apelido}
           onChangeText={setApelido}
           autoCapitalize="none"
@@ -42,6 +43,7 @@ export default function Login() {
         <TextInput
           style={styles.input}
           placeholder="Digite sua senha"
+          placeholderTextColor="black" 
           value={senha}
           onChangeText={setSenha}
           secureTextEntry
@@ -89,7 +91,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: '#7b8bb2',
+    color: 'black',
     marginBottom: 4,
   },
   input: {

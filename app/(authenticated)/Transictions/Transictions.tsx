@@ -247,9 +247,9 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       padding: 24,
-      marginHorizontal: 16, // Distância da borda esquerda e direita
-      marginTop: 16, // Distância da borda superior
-      marginBottom: 16, // Distância da borda inferior
+      marginHorizontal: 16, 
+      marginTop: 16, 
+      marginBottom: 16,
       backgroundColor: '#fff',
     },
     voltarButton: {

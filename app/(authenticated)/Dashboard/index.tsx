@@ -72,11 +72,14 @@ const buscarTransacoes = async () => {
 
     setCarregandoTransacoes(true);
     try {
-        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/contas/resumos-transacoes', {
+
+        const resposta = await fetch('https://mock-bank-mock-back.yexuz7.easypanel.host/transferencias', {
+            method: "GET",
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         });
+        
         const dados = await resposta.json();
         setTransacoes(dados);
     } catch (erro) {

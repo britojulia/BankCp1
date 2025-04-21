@@ -91,6 +91,7 @@ export default function Registro() {
             <TextInput
               style={styles.input}
               placeholder="Digite seu nome completo"
+              placeholderTextColor="black" 
               value={nome}
               onChangeText={setNome}
               autoCapitalize="words"
@@ -100,6 +101,7 @@ export default function Registro() {
             <TextInput
               style={styles.input}
               placeholder="123.456.789-00"
+              placeholderTextColor="black" 
               value={cpf}
               onChangeText={formatarCPF}
               keyboardType="numeric"
@@ -110,6 +112,7 @@ export default function Registro() {
             <TextInput
               style={styles.input}
               placeholder="Como gostaria de ser chamado?"
+              placeholderTextColor="black" 
               value={apelido}
               onChangeText={setApelido}
               autoCapitalize="none"
@@ -119,6 +122,7 @@ export default function Registro() {
             <TextInput
               style={styles.input}
               placeholder="mínimo de 6 caracteres"
+              placeholderTextColor="black" 
               value={senha}
               onChangeText={setSenha}
               secureTextEntry
@@ -170,7 +174,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: '#7b8bb2',
+    color: 'black',
     marginBottom: 4,
   },
   input: {

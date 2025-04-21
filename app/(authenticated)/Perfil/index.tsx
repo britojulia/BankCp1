@@ -64,6 +64,7 @@ export default function Perfil() {
                     <TextInput
                     style={styles.input}
                     placeholder="Nome"
+                    placeholderTextColor="black" 
                     value={nome}
                     onChangeText={setNome}
                     />
@@ -75,6 +76,7 @@ export default function Perfil() {
                     <TextInput
                     style={styles.input}
                     placeholder="Apelido"
+                    placeholderTextColor="black" 
                     value={apelido}
                     onChangeText={setApelido}
                     />
@@ -86,6 +88,7 @@ export default function Perfil() {
                     <TextInput
                     style={styles.input}
                     placeholder="Email"
+                    placeholderTextColor="black" 
                     value={email}
                     onChangeText={setEmail}
                     keyboardType="email-address"
@@ -145,7 +148,7 @@ const styles = StyleSheet.create({
     userName: {
       fontSize: 32,
       fontWeight: 'bold',
-      color: '#ec0c7a', // Corrigido: estava com ##ec0c7a
+      color: '#ec0c7a', 
       marginBottom: 8,
       textAlign: 'center',
     },
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
     },
     label: {
       fontSize: 14,
-      color: '#7b8bb2',
+      color: 'black',
       marginBottom: 8,
     },
     input: {

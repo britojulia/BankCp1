@@ -13,7 +13,7 @@ export default function Footer() {
         style={styles.button}
         onPress={() => router.push('/(authenticated)/Dashboard')}
       >
-        <Icon name="home" size={24} color="#2e3e5c" />
+        <Icon name="home" size={24} color="black" />
         <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
 
@@ -22,7 +22,7 @@ export default function Footer() {
         style={styles.button}
         onPress={() => router.push('/(authenticated)/Perfil')}
       >
-        <Icon name="person" size={24} color="#2e3e5c" />
+        <Icon name="person" size={24} color="black" />
         <Text style={styles.buttonText}>Perfil</Text>
       </TouchableOpacity>
     </View>
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#2e3e5c',
+    color: 'black',
     marginLeft: 5,
   },
 });

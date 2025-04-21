@@ -120,6 +120,7 @@ export default function Enviar() {
           <TextInput
             style={styles.input}
             placeholder="0,00"
+            placeholderTextColor="black" 
             keyboardType="numeric"
             value={valor}
             onChangeText={formatarValor}
@@ -132,6 +133,7 @@ export default function Enviar() {
           <TextInput
             style={styles.input}
             placeholder="Conta de destino"
+            placeholderTextColor="black" 
             value={contaDestino}
             onChangeText={setContaDestino}
             autoCapitalize="none"
@@ -144,7 +146,8 @@ export default function Enviar() {
           <Text style={styles.label}>Descrição (opcional)</Text>
           <TextInput
             style={styles.input}
-            placeholder="Descrição"
+            placeholder="Descrição da transferencia"
+            placeholderTextColor="black" 
             value={descricao}
             onChangeText={setDescricao}
           />
@@ -206,7 +209,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    color: '#7b8bb2',
+    color: 'black',
     marginBottom: 8,
   },
   input: {
