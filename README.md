@@ -31,7 +31,7 @@ Existem duas contas cadastradas para testes:
 - senha: 123456
 
 ## ▶️ Como rodar o projeto localmente
-copie o reposit´roio no vscode
+copie o repositório no vscode
 -npm install
 -npx expo start
 
