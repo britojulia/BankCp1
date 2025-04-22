@@ -21,7 +21,7 @@ Jubank é um aplicativo mobile desenvolvido com **React Native + Expo**, com foc
 
 ## 🧪 Contas de Teste
 Existem duas contas cadastradas para testes:
-- **Pedro Silva**
+- **Pedro Souza**
 - apelido: pedros
 - senha: 123456
 ---
