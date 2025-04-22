@@ -165,7 +165,7 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
                 </View>
 
                 {carregandoTransacoes ? (
-                    <ActivityIndicator style={styles.carregando} size="large" color="#4a7df3" />
+                    <ActivityIndicator style={styles.carregando} size="large" color="##2e3e5c" />
                 ) : (
                     <FlatList
                         data={transacoes}
@@ -175,7 +175,7 @@ const renderTransacao = ({ item }: { item: ITransacoesProps }) => {
                             <RefreshControl
                                 refreshing={atualizando}
                                 onRefresh={onRefresh}
-                                colors={['#4a7df3']}
+                                colors={['##2e3e5c']}
                             />
                         }
                         ListEmptyComponent={
