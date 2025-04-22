@@ -132,12 +132,24 @@ export default function Enviar() {
           <Text style={styles.label}>Para quem você deseja enviar?</Text>
           <TextInput
             style={styles.input}
-            placeholder="Conta de destino"
+            placeholder="Apelido da conta de destino"
             placeholderTextColor="black" 
             value={contaDestino}
             onChangeText={setContaDestino}
             autoCapitalize="none"
             autoCorrect={false}
+          />
+        </View>
+
+          {/* E-mail do destinatario */}
+          <View style={styles.inputContainer}>
+          <Text style={styles.label}> E-mail do destinatario</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Informe o e-mail"
+            placeholderTextColor="black"
+            autoCapitalize="none"
+            keyboardType="email-address"
           />
         </View>
 

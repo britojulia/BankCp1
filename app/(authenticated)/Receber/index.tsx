@@ -1,3 +1,4 @@
+import { useAuth } from "@/hooks/useAuth"; 
 import Footer from '@/components/Rodape';
 import { useRouter } from 'expo-router';
 import React, { useState, useEffect } from 'react';
@@ -13,33 +14,17 @@ import {
 
 export default function Receber() {
   const [carregando, setCarregando] = useState(true);
-  const [nomeUsuario, setNomeUsuario] = useState('');
-  const [apelido, setApelido] = useState('');
 
+  const { usuario } = useAuth(); 
   const router = useRouter();
 
   useEffect(() => {
-    const carregarDadosUsuario = async () => {
-      setCarregando(true);
-      try {
-        setTimeout(() => {
-          setNomeUsuario('João Silva');
-          setApelido('joaozinho');
-          setCarregando(false);
-        }, 1000);
-      } catch (erro) {
-        console.error('Erro ao carregar dados do usuário:', erro);
-        Alert.alert('Erro', 'Não foi possível carregar seus dados');
-        setCarregando(false);
-      }
-    };
-
-    carregarDadosUsuario();
+    setCarregando(false);
   }, []);
 
   const compartilharApelido = async () => {
     try {
-      Alert.alert('Compartilhar', `Apelido: ${apelido}`);
+      Alert.alert('Compartilhar', `Apelido: ${usuario.apelido}`);
     } catch (erro) {
       Alert.alert('Erro', 'Não foi possível compartilhar sua chave Pix');
     }
@@ -68,7 +53,8 @@ export default function Receber() {
           <View>
             <View style={styles.dadosContainer}>
               <Text style={styles.dadosTitle}>Receber como</Text>
-              <Text style={styles.dadosText}>{nomeUsuario}</Text>
+              <Text style={styles.dadosText}>{usuario.nome}</Text>
+
             </View>
 
             <View style={styles.qrContainer}>
@@ -80,7 +66,7 @@ export default function Receber() {
             <View style={styles.apelidoContainer}>
               <Text style={styles.apelidoTitle}>Seu Apelido</Text>
               <View style={styles.apelidoContent}>
-                <Text style={styles.apelidoText}>{apelido}</Text>
+                <Text style={styles.apelidoText}>{usuario.apelido}</Text>
                 <TouchableOpacity onPress={copiarApelido} style={styles.copiarButton}>
                   <Text style={styles.copiarText}>Copiar</Text>
                 </TouchableOpacity>
@@ -144,8 +130,9 @@ const styles = StyleSheet.create({
     color: '#2e3e5c',
   },
   dadosText: {
-    fontSize: 16,
-    color: '#7b8bb2',
+    fontSize: 22,
+    color: '#ec0c7a',
+    fontWeight: 'bold',
   },
   qrContainer: {
     marginBottom: 24,
@@ -178,7 +165,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   apelidoText: {
-    fontSize: 16,
+    fontSize: 22,
     color: '#2e3e5c',
     marginRight: 10,
   },
